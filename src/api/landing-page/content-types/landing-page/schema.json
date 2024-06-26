@@ -26,6 +26,12 @@
       "type": "component",
       "repeatable": false,
       "component": "posts.social-automation"
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.hero"
+      ]
     }
   }
 }
