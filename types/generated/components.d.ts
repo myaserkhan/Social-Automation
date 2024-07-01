@@ -13,6 +13,18 @@ export interface BlocksHero extends Schema.Component {
   };
 }
 
+export interface BlocksPricing extends Schema.Component {
+  collectionName: 'components_blocks_pricings';
+  info: {
+    displayName: 'Pricing';
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+    plan: Attribute.Component<'elements.pricing-card', true>;
+  };
+}
+
 export interface BlocksRow extends Schema.Component {
   collectionName: 'components_blocks_rows';
   info: {
@@ -48,6 +60,24 @@ export interface ElementsCard extends Schema.Component {
   };
 }
 
+export interface ElementsPricingCard extends Schema.Component {
+  collectionName: 'components_elements_pricing_cards';
+  info: {
+    displayName: 'Pricing Card';
+  };
+  attributes: {
+    planType: Attribute.String;
+    planPrice: Attribute.String;
+    isFeatured: Attribute.Boolean & Attribute.DefaultTo<false>;
+    services: Attribute.Relation<
+      'elements.pricing-card',
+      'oneToMany',
+      'api::service.service'
+    >;
+    link: Attribute.Component<'elements.button-link'>;
+  };
+}
+
 export interface PostsSocialAutomation extends Schema.Component {
   collectionName: 'components_posts_social_automations';
   info: {
@@ -64,9 +94,11 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'blocks.hero': BlocksHero;
+      'blocks.pricing': BlocksPricing;
       'blocks.row': BlocksRow;
       'elements.button-link': ElementsButtonLink;
       'elements.card': ElementsCard;
+      'elements.pricing-card': ElementsPricingCard;
       'posts.social-automation': PostsSocialAutomation;
     }
   }
