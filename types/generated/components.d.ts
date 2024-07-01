@@ -1,5 +1,17 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface BlocksCta extends Schema.Component {
+  collectionName: 'components_blocks_ctas';
+  info: {
+    displayName: 'Cta';
+  };
+  attributes: {
+    heading: Attribute.String;
+    description: Attribute.Text;
+    form: Attribute.Component<'elements.form'>;
+  };
+}
+
 export interface BlocksHero extends Schema.Component {
   collectionName: 'components_blocks_heroes';
   info: {
@@ -60,6 +72,31 @@ export interface ElementsCard extends Schema.Component {
   };
 }
 
+export interface ElementsForm extends Schema.Component {
+  collectionName: 'components_elements_forms';
+  info: {
+    displayName: 'Form';
+  };
+  attributes: {
+    heading: Attribute.String;
+    description: Attribute.Text;
+    input: Attribute.Component<'elements.input', true>;
+    button: Attribute.Component<'elements.button-link'>;
+  };
+}
+
+export interface ElementsInput extends Schema.Component {
+  collectionName: 'components_elements_inputs';
+  info: {
+    displayName: 'Input';
+  };
+  attributes: {
+    placeholder: Attribute.String;
+    label: Attribute.String;
+    inputType: Attribute.String;
+  };
+}
+
 export interface ElementsPricingCard extends Schema.Component {
   collectionName: 'components_elements_pricing_cards';
   info: {
@@ -93,11 +130,14 @@ export interface PostsSocialAutomation extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'blocks.cta': BlocksCta;
       'blocks.hero': BlocksHero;
       'blocks.pricing': BlocksPricing;
       'blocks.row': BlocksRow;
       'elements.button-link': ElementsButtonLink;
       'elements.card': ElementsCard;
+      'elements.form': ElementsForm;
+      'elements.input': ElementsInput;
       'elements.pricing-card': ElementsPricingCard;
       'posts.social-automation': PostsSocialAutomation;
     }
